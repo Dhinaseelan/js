@@ -29,3 +29,24 @@ console.log(impure2());
 // External state use----❌ No-----------------------✅ Yes
 // impure:May produce different outputs for the same input
 // pure:Returns the same output for the same input.
+//----------------------Closures----------------------------->
+function outerfun(outerdata){
+    console.log("outerdata",outerdata)
+    const innerfun=(innerdata)=>{
+        console.log("innerdata",innerdata)
+    }
+    return innerfun;
+}
+const innerdata=outerfun("outside outside");
+innerdata("inside inside")
+const pointsmain=()=>{
+    const totalpoints=100;
+    const addpoint=(point)=>totalpoints+point;
+    const removepoint=(point)=>totalpoints-point;
+    const gettotalpoint=()=>totalpoints;
+    return {addpoint,removepoint,gettotalpoint};
+}
+const all=pointsmain();
+console.log(all.addpoint(20))
+console.log(all.removepoint(40))
+console.log(all.gettotalpoint())
